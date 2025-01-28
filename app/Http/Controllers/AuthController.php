@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -50,11 +51,13 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard')->with('success', 'Login berhasil.');
+            return redirect()->route('dashboard')->with(['success' => 'Login berhasil.', 'title' => 'Home']);
         }
 
-        return back()->withErrors(['email' => 'Email atau password salah.']);
+        return back()->withErrors(['email' => 'Email atau password salah.'])->withInput();
     }
+
+
 
     // Logout
     public function logout()

@@ -1,14 +1,17 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\LocationController;
 
 Route::get('/add-location', function () {
-    return view('map.add-location');
+    $title = 'Add Location';
+    return view('map.add-location', compact('title'));
 });
 Route::get('/view-location', function () {
-    return view('map.view-location');
+    $title = 'View Locations';
+    return view('map.view-location', compact('title'));
 });
 Route::get('/add-location', [LocationController::class, 'addLocationForm'])->name('add-location');
 Route::post('/store-location', [LocationController::class, 'storeLocation'])->name('store-location');
@@ -21,5 +24,6 @@ Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', function () {
-    return view('home');
+    $title = session('title', 'Dashboard'); // Default "Dashboard" jika "title" tidak ada
+    return view('home', compact('title'));
 })->middleware('auth')->name('dashboard');

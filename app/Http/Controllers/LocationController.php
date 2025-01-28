@@ -45,11 +45,13 @@ class LocationController extends Controller
 
     public function addLocationForm()
     {
-        return view('map/add-location');
+        $title = "Add Location"; // Variabel yang ingin Anda kirim
+        return view('map/add-location', ['title' => $title]);
     }
 
     public function viewMap()
     {
-        return view('map/view-location');
+        $title = "View Location"; // Variabel yang ingin Anda kirim
+        return view('map/view-location', ['title' => $title]);
     }
 }
