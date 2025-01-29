@@ -55,18 +55,12 @@
 <div class="sidebar">
     <h1>{{$title}}</h1>
     <a href="/add-location">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="M16.5 10.5V3.75a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0-.75.75V10.5m15 0h-3M3 10.5h3m-3 0v6.75a.75.75 0 0 0 .75.75h16.5a.75.75 0 0 0 .75-.75V10.5m-18 0V9m18 1.5V9m-18 0H3m18 0h-3M3 15.75V18h18v-2.25" />
-        </svg>
         Add Map
     </a>
     <a href="/view-location">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-            stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                d="M3.75 3v16.5c0 .414.336.75.75.75h7.5a.75.75 0 0 0 .75-.75V3.75a.75.75 0 0 0-.75-.75H4.5a.75.75 0 0 0-.75.75zm9 16.5H19.5c.414 0 .75-.336.75-.75V9.75a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0-.75.75v9.75a.75.75 0 0 0 .75.75zm0-8.25H19.5M12.75 9H9" />
-        </svg>
         View Map
+    </a>
+    <a href="/table-location">
+        table Map
     </a>
 </div>

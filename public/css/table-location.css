@@ -1,0 +1,87 @@
+/* Gaya untuk keseluruhan halaman */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container utama */
+.container {
+    max-width: 900px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 300px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Judul halaman */
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+/* Gaya tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Gaya tombol */
+.btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+}
+
+/* Tombol Edit */
+.btn-warning {
+    background-color: #ffc107;
+    color: black;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+/* Tombol Delete */
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Efek hover pada baris tabel */
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsif */
+@media screen and (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+    .btn {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}

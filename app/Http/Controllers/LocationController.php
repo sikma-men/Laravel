@@ -54,4 +54,41 @@ class LocationController extends Controller
         $title = "View Location"; // Variabel yang ingin Anda kirim
         return view('map/view-location', ['title' => $title]);
     }
+
+
+    public function edit($id)
+    {
+        $locations = Location::findOrFail($id);
+        return view('locations.edit', compact('location'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'category' => 'required|string',
+        ]);
+
+        $locations = Location::findOrFail($id);
+        $locations->update([
+            'name' => $request->name,
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+            'category' => $request->category,
+        ]);
+
+        return redirect()->route('locations.index')->with('success', 'Lokasi berhasil diperbarui!');
+    }
+    public function index()
+    {
+        return response()->json(Location::all());
+    }
+    public function destroy($id)
+    {
+        $locations = Location::findOrFail($id);
+        $locations->delete();
+        return response()->json(['message' => 'Location deleted successfully']);
+    }
 }
