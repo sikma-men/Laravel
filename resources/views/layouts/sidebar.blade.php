@@ -23,7 +23,7 @@
         padding-bottom: 10px;
     }
 
-    .sidebar a {
+    .before {
         text-decoration: none;
         color: #f1f5f9;
         padding: 15px 20px;
@@ -35,6 +35,19 @@
     }
 
     .sidebar a:hover {
+        background-color: #334155;
+        padding-left: 30px;
+        border-left: 4px solid #e2e8f0;
+    }
+    .after {
+        text-decoration: none;
+        color: #f1f5f9;
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
         background-color: #334155;
         padding-left: 30px;
         border-left: 4px solid #e2e8f0;
@@ -54,13 +67,13 @@
 
 <div class="sidebar">
     <h1>{{$title}}</h1>
-    <a href="/add-location">
+    <a href="/add-location" class="{{ request()->is('add-location') ? 'after' :'before' }}">
         Add Map
     </a>
-    <a href="/view-location">
+    <a href="/view-location" class="{{ request()->is('view-location') ? 'after' :'before' }}">
         View Map
     </a>
-    <a href="/table-location">
+    <a href="/table-location" class="{{ request()->is('table-ocation') ? 'after' :'before' }}">
         table Map
     </a>
 </div>

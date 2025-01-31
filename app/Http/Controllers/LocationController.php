@@ -58,8 +58,13 @@ class LocationController extends Controller
 
     public function edit($id)
     {
-        $locations = Location::findOrFail($id);
-        return view('locations.edit', compact('location'));
+        $location = Location::find($id);
+
+        if (!$location) {
+            return redirect()->back()->with('error', 'Lokasi tidak ditemukan.');
+        }
+
+        return view('map.edit-location', compact('location'));
     }
 
     public function update(Request $request, $id)
@@ -83,12 +88,17 @@ class LocationController extends Controller
     }
     public function index()
     {
+
         return response()->json(Location::all());
     }
     public function destroy($id)
     {
-        $locations = Location::findOrFail($id);
-        $locations->delete();
-        return response()->json(['message' => 'Location deleted successfully']);
+        $location = Location::find($id);
+        if (!$location) {
+            return response()->json(['message' => 'Data tidak ditemukan'], 404);
+        }
+        $location->delete();
+        return response()->json(['message' => 'Data berhasil dihapus']);
     }
+
 }

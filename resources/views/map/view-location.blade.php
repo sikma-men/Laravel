@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    @extends('layouts.sideba    r')
+    @extends('layouts.sidebar')
     <h1>View Map</h1>
     <div id="filter">
         <div class="select-container">
