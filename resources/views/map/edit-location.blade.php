@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit Location</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="{{ asset('css/add-location.css') }}">
@@ -13,46 +12,50 @@
 <body>
     <h1>Edit Location</h1>
     @extends('layouts.sidebar')
-    <form action="{{ route('update-location', $location->id) }}" method="POST" onsubmit="showModal(event)">
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <form action="{{ route('update-location', $location->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div>
             <label for="name">Nama:</label>
-            <input type="text" id="name" name="name" value="{{ $location->name }}" required>
+            <input type="text" id="name" name="name" value="{{ $location->name }}" required
+                autocomplete="off">
         </div>
         <div>
             <label for="latitude">Latitude:</label>
-            <input type="text" id="latitude" name="latitude" value="{{ $location->latitude }}" required>
+            <input type="text" id="latitude" name="latitude" value="{{ $location->latitude }}" required
+                autocomplete="off">
         </div>
         <div>
             <label for="longitude">Longitude:</label>
-            <input type="text" id="longitude" name="longitude" value="{{ $location->longitude }}" required>
+            <input type="text" id="longitude" name="longitude" value="{{ $location->longitude }}" required
+                autocomplete="off">
         </div>
         <div>
             <label for="category">Category:</label>
-            <select id="category" name="category" required>
+            <select id="category" name="category" required autocomplete="off">
                 <option value="">Select a category</option>
-                <option value="rumah sakit" {{ $location->category == 'rumah sakit' ? 'selected' : '' }}>Rumah Sakit</option>
+                <option value="rumah sakit" {{ $location->category == 'rumah sakit' ? 'selected' : '' }}>Rumah Sakit
+                </option>
                 <option value="sekolah" {{ $location->category == 'sekolah' ? 'selected' : '' }}>Sekolah</option>
                 <option value="masjid" {{ $location->category == 'masjid' ? 'selected' : '' }}>Masjid</option>
                 <option value="gereja" {{ $location->category == 'gereja' ? 'selected' : '' }}>Gereja</option>
-                <option value="pom bensin" {{ $location->category == 'pom bensin' ? 'selected' : '' }}>Pom Bensin</option>
-                <option value="rumah makan" {{ $location->category == 'rumah makan' ? 'selected' : '' }}>Rumah Makan</option>
+                <option value="pom bensin" {{ $location->category == 'pom bensin' ? 'selected' : '' }}>Pom Bensin
+                </option>
+                <option value="rumah makan" {{ $location->category == 'rumah makan' ? 'selected' : '' }}>Rumah Makan
+                </option>
             </select>
         </div>
-        <button type="submit"><span>Update Location</span></button>
+        <button type="submit">Update Location</button>
     </form>
 
     <div id="map"></div>
-
-    <!-- Modal -->
-    <div class="modal" id="successModal">
-        <div class="modal-content">
-            <h2>Success!</h2>
-            <p>Lokasi berhasil diperbarui!</p>
-            <button onclick="closeModal()">OK</button>
-        </div>
-    </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
@@ -64,7 +67,6 @@
 
         var marker = L.marker([{{ $location->latitude }}, {{ $location->longitude }}]).addTo(map);
 
-        // Update koordinat ketika peta diklik
         map.on('click', function(e) {
             var lat = e.latlng.lat;
             var lng = e.latlng.lng;
@@ -73,16 +75,6 @@
             document.getElementById('latitude').value = lat;
             document.getElementById('longitude').value = lng;
         });
-
-        function showModal(event) {
-            event.preventDefault();
-            document.getElementById('successModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('successModal').style.display = 'none';
-            document.querySelector('form').submit();
-        }
     </script>
 </body>
 

@@ -63,8 +63,8 @@ class LocationController extends Controller
         if (!$location) {
             return redirect()->back()->with('error', 'Lokasi tidak ditemukan.');
         }
-
-        return view('map.edit-location', compact('location'));
+        $title = "Edit Location"; // Tambahkan variabel title
+        return view('map.edit-location', compact('location', 'title'));
     }
 
     public function update(Request $request, $id)
@@ -76,16 +76,17 @@ class LocationController extends Controller
             'category' => 'required|string',
         ]);
 
-        $locations = Location::findOrFail($id);
-        $locations->update([
+        $location = Location::findOrFail($id); // Pastikan ID valid
+        $location->update([
             'name' => $request->name,
             'latitude' => $request->latitude,
             'longitude' => $request->longitude,
             'category' => $request->category,
         ]);
 
-        return redirect()->route('locations.index')->with('success', 'Lokasi berhasil diperbarui!');
+        return redirect()->route('edit-location', $id)->with('success', 'Lokasi berhasil diperbarui!');
     }
+
     public function index()
     {
 
@@ -100,5 +101,4 @@ class LocationController extends Controller
         $location->delete();
         return response()->json(['message' => 'Data berhasil dihapus']);
     }
-
 }

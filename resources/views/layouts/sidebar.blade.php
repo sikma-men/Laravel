@@ -73,7 +73,7 @@
     <a href="/view-location" class="{{ request()->is('view-location') ? 'after' :'before' }}">
         View Map
     </a>
-    <a href="/table-location" class="{{ request()->is('table-ocation') ? 'after' :'before' }}">
+    <a href="/table-location" class="{{ request()->is('table-location') ? 'after' :'before' }}">
         table Map
     </a>
 </div>
