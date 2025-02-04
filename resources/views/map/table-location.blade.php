@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,30 +7,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/table.css') }}">
-    <style>
-        .custom-table {
-            margin-left: auto;
-            margin-right: auto;
-            width: 80%;
-            /* Lebar tabel agar tidak terlalu lebar */
-            border-radius: 10px;
-            /* Membuat sudut tabel lebih lembut */
-            overflow: hidden;
-        }
-
-        .custom-table th,
-        .custom-table td {
-            text-align: center;
-            /* Teks tengah */
-            vertical-align: middle;
-        }
-    </style>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-
 <body>
     @extends('layouts.sidebar')
-    <div class="container-fluid mt-5" style="margin-left: 120px;">
-        <h2 class="text-center mb-4 ">Data Lokasi</h2>
+    <div class="container-fluid mt-5">
+        <h2 class="text-center mb-4">Data Lokasi</h2>
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover custom-table">
                 <thead class="table-dark">
@@ -47,7 +29,6 @@
             </table>
         </div>
     </div>
-
     <script>
         function fetchLocations() {
             fetch('/locations')
@@ -77,35 +58,54 @@
         }
 
         function deleteLocation(id) {
-            if (confirm("Apakah Anda yakin ingin menghapus lokasi ini?")) {
-                fetch(`/locations  /${id}`, { // Pastikan endpoint sesuai
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        },
-                        body: JSON.stringify({
-                            _method: 'DELETE'
-                        }) // Tambahkan _method jika pakai Route::resource()
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("Gagal menghapus data.");
-                        }
-                        return response.json();
-                    })
-                    .then(() => {
-                        alert("Data berhasil dihapus.");
-                        fetchLocations(); // Refresh tabel setelah delete
-                    })
-                    .catch(error => console.error('Error deleting location:', error));
-            }
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data ini akan dihapus secara permanen!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/locations/${id}`, { // Pastikan endpoint sesuai
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            },
+                            body: JSON.stringify({
+                                _method: 'DELETE'
+                            }) // Tambahkan _method jika pakai Route::resource()
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Gagal menghapus data.");
+                            }
+                            return response.json();
+                        })
+                        .then(() => {
+                            Swal.fire(
+                                'Terhapus!',
+                                'Data berhasil dihapus.',
+                                'success'
+                            );
+                            fetchLocations(); // Refresh tabel setelah delete
+                        })
+                        .catch(error => {
+                            console.error('Error deleting location:', error);
+                            Swal.fire(
+                                'Gagal!',
+                                'Terjadi kesalahan saat menghapus data.',
+                                'error'
+                            );
+                        });
+                }
+            });
         }
-
 
         document.addEventListener("DOMContentLoaded", fetchLocations);
     </script>
-
 </body>
-
 </html>
