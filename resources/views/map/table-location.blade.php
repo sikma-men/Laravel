@@ -54,7 +54,20 @@
         }
 
         function editLocation(id) {
-            window.location.href = `/edit-location/${id}`; // Redirect ke halaman edit
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda akan dialihkan ke halaman edit.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, edit!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/edit-location/${id}`; // Redirect ke halaman edit
+                }
+            });
         }
 
         function deleteLocation(id) {
@@ -108,4 +121,4 @@
         document.addEventListener("DOMContentLoaded", fetchLocations);
     </script>
 </body>
-</html>
+</html> 
