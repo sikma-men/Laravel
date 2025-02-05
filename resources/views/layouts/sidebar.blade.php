@@ -10,6 +10,7 @@
     <style>
         /* Gaya dasar navbar */
         .navbar {
+            padding-top:20px;
             position: fixed;
             top: 0;
             left: 0;

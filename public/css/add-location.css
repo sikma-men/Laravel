@@ -1,6 +1,6 @@
 /* Gaya dasar body */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f9fafb;
@@ -18,7 +18,7 @@ h1 {
 }
 
 h1::after {
-    content: '';
+    content: "";
     display: block;
     width: 60px;
     height: 3px;
@@ -29,7 +29,7 @@ h1::after {
 
 /* Main Content */
 .main-content {
-    margin-top: 80px; /* Memberi ruang untuk navbar */
+    margin-top: 10px; /* Memberi ruang untuk navbar */
     padding: 20px;
 }
 
@@ -52,7 +52,7 @@ h1::after {
 }
 
 .form-container div {
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
 .form-container label {
@@ -110,7 +110,7 @@ h1::after {
 /* Peta */
 .map-container {
     flex: 1 1 50%; /* Peta akan mengambil 50% lebar */
-    height: 400px;
+    height: 625px;
     border-radius: 15px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
@@ -148,7 +148,7 @@ h1::after {
         -moz-transform: scale(0.9);
         -ms-transform: scale(0.9);
         -o-transform: scale(0.9);
-}
+    }
     to {
         opacity: 1;
         transform: scale(1);

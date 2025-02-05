@@ -17,6 +17,10 @@ Route::get('/table-location', function () {
     $title = 'Table Locations';
     return view('map.table-location', compact('title'));
 });
+Route::get('/card-location', function () {
+    $title = 'Table Locations';
+    return view('map.card-location', compact('title'));
+});
 Route::get('/add-location', [LocationController::class, 'addLocationForm'])->name('add-location');
 Route::post('/store-location', [LocationController::class, 'storeLocation'])->name('store-location');
 Route::get('/view-map', [LocationController::class, 'viewMap'])->name('view-map');

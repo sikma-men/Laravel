@@ -19,11 +19,11 @@
             <table class="table table-bordered table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th>Nama Lokasi</th>
-                        <th>Kategori</th>
-                        <th>Longitude</th>
-                        <th>Latitude</th>
-                        <th>Aksi</th>
+                        <th>Nama Petani</th>
+                        <th>Alamat</th>
+                        <th>Nama Sawah/kebun</th>
+                        <th>No Handphon</th>
+                        <th>Email</th>
                     </tr>
                 </thead>
                 <tbody id="location-table">
@@ -31,7 +31,7 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn btn-primary"><a href="/card-location" style="color: white; text-decoration: none;">Card View</a></but+*
+        <button class="btn btn-primary"><a href="/card-location" style="color: white; text-decoration: none;">Card View</a></button>
     </div>
     <script>
         function fetchLocations() {
