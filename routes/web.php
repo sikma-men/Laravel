@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\SupplierController;
 
 Route::get('/add-location', function () {
     $title = 'Add Location';
@@ -35,6 +36,16 @@ Route::get('/edit-location/{id}', [LocationController::class, 'edit'])->name('ed
 Route::put('/update-location/{id}', [LocationController::class, 'update'])->name('update-location');
 Route::delete('/locations/{id}', [LocationController::class, 'destroy']);
 
+
+Route::get('/suppliers', [SupplierController::class, 'index']);
+Route::post('/suppliers', [SupplierController::class, 'store']);
+Route::put('/suppliers/{id}', [SupplierController::class, 'update']);
+Route::delete('/suppliers/{id}', [SupplierController::class, 'destroy']);
+
+Route::get('/tabel-petani  ', function () {
+    $title = 'Table Locations';
+    return view('account.tabel-petani', compact('title'));
+});
 
 Route::get('/', function () {
     $title = session('title', 'Dashboard'); // Default "Dashboard" jika "title" tidak ada

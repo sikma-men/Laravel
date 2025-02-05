@@ -3,126 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location Data</title>
+    <title>Supplier Data</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    @extends('layouts.sidebar')
     <div class="container mt-5">
-        <div class="d-flex align-items-center justify-content-between mt-3">
-            <h2 class="text-center flex-grow-1 mb-0">Data Lokasi</h2>
-        </div>
+        <h2 class="text-center">Data Supplier</h2>
         <div class="table-responsive mt-4">
-            <table class="table table-bordered table-striped table-hover">
+            <table class="table table-bordered table-striped table-hover222">
                 <thead class="table-dark">
                     <tr>
-                        <th>Nama Petani</th>
-                        <th>Alamat</th>
-                        <th>Nama Sawah/kebun</th>
-                        <th>No Handphon</th>
+                        <th>Nama Depan</th>
+                        <th>Nama Belakang</th>
                         <th>Email</th>
+                        <th>Telepon</th>
+                        <th>Perusahaan</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody id="location-table">
+                <tbody id="supplier-table">
                     <!-- Data akan dimuat di sini -->
                 </tbody>
             </table>
         </div>
-        <button class="btn btn-primary"><a href="/card-location" style="color: white; text-decoration: none;">Card View</a></button>
     </div>
+
     <script>
-        function fetchLocations() {
-            fetch('/locations')
+        function fetchSuppliers() {
+            fetch('/suppliers')
                 .then(response => response.json())
-                .then(locations => {
-                    let tableBody = document.getElementById('location-table');
-                    tableBody.innerHTML = ''; // Bersihkan sebelum diisi ulang
-                    locations.forEach(location => {
+                .then(suppliers => {
+                    let tableBody = document.getElementById('supplier-table');
+                    tableBody.innerHTML = '';
+                    suppliers.forEach(supplier => {
                         let row = `
                             <tr>
-                                <td>${location.name}</td>
-                                <td>${location.category}</td>
-                                <td>${location.longitude}</td>
-                                <td>${location.latitude}</td>
+                                <td>${supplier.first_name}</td>
+                                <td>${supplier.last_name}</td>
+                                <td>${supplier.email}</td>
+                                <td>${supplier.phone}</td>
+                                <td>${supplier.company_name}</td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            &#x22EE;
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><button class="dropdown-item" onclick="editLocation(${location.id})"><image src="image/edit.png" width="20px"></image>Edit</button></li>
-                                            <li><button class="dropdown-item text-danger" onclick="deleteLocation(${location.id})"><image src="image/bin.png" width="20px"></image>Delete</button></li>
-                                        </ul>
-                                    </div>
+                                    <button class="btn btn-warning btn-sm" onclick="editSupplier(${supplier.id})">Edit</button>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteSupplier(${supplier.id})">Delete</button>
                                 </td>
                             </tr>
                         `;
                         tableBody.innerHTML += row;
                     });
                 })
-                .catch(error => console.error('Error fetching locations:', error));
+                .catch(error => console.error('Error fetching suppliers:', error));
         }
 
-        function editLocation(id) {
+        function deleteSupplier(id) {
             Swal.fire({
                 title: 'Apakah Anda yakin?',
-                text: "Anda akan dialihkan ke halaman edit.",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, edit!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = `/edit-location/${id}`;
-                }
-            });
-        }
-
-        function deleteLocation(id) {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Data ini akan dihapus secara permanen!",
+                text: "Data ini akan dihapus!",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
                 confirmButtonText: 'Ya, hapus!',
                 cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`/locations/${id}`, {
-                            method: 'DELETE',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                            },
-                            body: JSON.stringify({ _method: 'DELETE' })
-                        })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error("Gagal menghapus data.");
-                            }
-                            return response.json();
-                        })
-                        .then(() => {
-                            Swal.fire('Terhapus!', 'Data berhasil dihapus.', 'success');
-                            fetchLocations();
-                        })
-                        .catch(error => {
-                            console.error('Error deleting location:', error);
-                            Swal.fire('Gagal!', 'Terjadi kesalahan saat menghapus data.', 'error');
-                        });
+                    fetch(`/suppliers/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(() => {
+                        Swal.fire('Terhapus!', 'Data berhasil dihapus.', 'success');
+                        fetchSuppliers();
+                    })
+                    .catch(error => {
+                        console.error('Error deleting supplier:', error);
+                        Swal.fire('Gagal!', 'Terjadi kesalahan.', 'error');
+                    });
                 }
             });
         }
 
-        document.addEventListener("DOMContentLoaded", fetchLocations);
+        document.addEventListener("DOMContentLoaded", fetchSuppliers);
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

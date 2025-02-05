@@ -11,7 +11,7 @@
 </head>
 <body>
     @extends('layouts.sidebar')
-    <div class="container mt-5">
+    <div class="container " style="margin-top: 80px;">
         <div class="d-flex align-items-center justify-content-between mt-3">
             <h2 class="text-center flex-grow-1 mb-0">Data Lokasi</h2>
         </div>

@@ -28,7 +28,7 @@
         }
 
         /* Branding (judul) */
-        .navbar-brand h1 {
+        .navbar-bran h1 {
             font-size: 1.2rem;
             margin: 0;
             font-weight: bold;
@@ -39,7 +39,7 @@
             transition: all 0.3s ease;
         }
 
-        .navbar-brand h1:hover {
+        .navbar-bran h1:hover {
             transform: scale(1.05);
         }
 
@@ -159,7 +159,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="navbar-brand">
+        <div class="navbar-bran">
             <h1>PT Jumpshot Jaya</h1>
         </div>
         <div class="navbar-links">
