@@ -1,11 +1,23 @@
 <?php
+
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Supplier;
 
 class SupplierController extends Controller
 {
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('dashboard')->with(['success' => 'Login berhasil.', 'title' => 'Home']);
+        }
+
+        return back()->withErrors(['email' => 'Email atau password salah.'])->withInput();
+    }
     public function index()
     {
         $suppliers = Supplier::all();
@@ -18,13 +30,41 @@ class SupplierController extends Controller
         return response()->json(['message' => 'Supplier berhasil ditambahkan', 'data' => $supplier]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $supplier = Supplier::findOrFail($id);
-        $supplier->update($request->all());
-        return response()->json(['message' => 'Supplier berhasil diperbarui']);
+        $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|string',
+            'phone' => 'required|string',
+            'description' => 'required|string',
+            'company_name' => 'required|string',
+            'city' => 'required|string',
+            'state' => 'required|string',
+            'country' => 'required|string',
+            'zipcode' => 'required|string',
+        ]);
+
+        $supplier = new supplier();
+        $supplier->first_name = $request->first_name;
+        $supplier->last_name = $request->last_name;
+        $supplier->email = $request->email;
+        $supplier->phone = $request->phone;
+        $supplier->description = $request->description;
+        $supplier->company_name = $request->company_name;
+        $supplier->city = $request->city;
+        $supplier->state = $request->state;
+        $supplier->country = $request->country;
+        $supplier->zipcode = $request->zipcode;
+        $supplier->save();
+
+        return redirect()->route('table-supplier')->with('success', 'Location added successfully!');
     }
 
+    public function table_supplier()
+    {
+        return view('account.table-supplier');
+    }
     public function destroy($id)
     {
         $supplier = Supplier::findOrFail($id);

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
-    <div class="container mt-5">
+    @extends('layouts.sidebar')
+    <div class="container " style="margin-top: 80px;">
         <h2 class="text-center">Data Supplier</h2>
+        <button class="btn btn-primary"><a href="/add-supplier" style="text-decoration: none; color: white; ">Tambah Supplier</a></button>
         <div class="table-responsive mt-4">
             <table class="table table-bordered table-striped table-hover222">
                 <thead class="table-dark">
@@ -68,20 +72,21 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch(`/suppliers/${id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(() => {
-                        Swal.fire('Terhapus!', 'Data berhasil dihapus.', 'success');
-                        fetchSuppliers();
-                    })
-                    .catch(error => {
-                        console.error('Error deleting supplier:', error);
-                        Swal.fire('Gagal!', 'Terjadi kesalahan.', 'error');
-                    });
+                            method: 'DELETE',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                    'content')
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(() => {
+                            Swal.fire('Terhapus!', 'Data berhasil dihapus.', 'success');
+                            fetchSuppliers();
+                        })
+                        .catch(error => {
+                            console.error('Error deleting supplier:', error);
+                            Swal.fire('Gagal!', 'Terjadi kesalahan.', 'error');
+                        });
                 }
             });
         }
@@ -91,4 +96,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

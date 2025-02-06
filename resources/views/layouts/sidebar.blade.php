@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
     <style>
         /* Gaya dasar navbar */
         .navbar {
-            padding-top:20px;
+            padding-top: 20px;
             position: fixed;
             top: 0;
             left: 0;
@@ -157,6 +158,7 @@
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="navbar-bran">
@@ -180,10 +182,23 @@
                     </a>
                 </div>
             </div>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle">
+                    <i class="fas fa-user"></i> User Management
+                </a>
+                <div class="dropdown-content">
+                    <a href="/table-supplier">
+                        <i class="fas fa-table"></i> Data Supplier</a>
+                </div>
+            </div>
+
         </div>
-        <div class="navbar-footer">
-            &copy; 2025 Garena Jumpshot
-        </div>
+        <footer>
+            <div class="navbar-footer">
+                &copy; 2025 Garena Jumpshot
+            </div>
+        </footer>
     </nav>
 </body>
+
 </html>

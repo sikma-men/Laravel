@@ -31,7 +31,7 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn btn-primary"><a href="/card-location" style="color: white; text-decoration: none;">Card View</a></but+*
+        <button class="btn btn-primary"><a href="/card-location" style="color: white; text-decoration: none;">Card View</a></button>
     </div>
     <script>
         function fetchLocations() {
