@@ -12,7 +12,7 @@
 
 <body>
     @extends('layouts.sidebar')
-    <h1>View Map</h1>
+    <h1  style="margin-top: 80px;">View Map</h1>
     <div id="filter">
         <div class="select-container">
             <select id="category-filter">

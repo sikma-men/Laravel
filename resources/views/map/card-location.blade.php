@@ -11,56 +11,40 @@
 </head>
 <body>
     @extends('layouts.sidebar')
-    <div class="container " style="margin-top: 80px;">
+    <div class="container" style="margin-top: 80px;">
         <div class="d-flex align-items-center justify-content-between mt-3">
+            <button class="btn btn-primary">
+                <a href="/table-location" class="text-white text-decoration-none"><img src="image/arrow.png" alt="" width="25px"></a>
+            </button>
             <h2 class="text-center flex-grow-1 mb-0">Data Lokasi</h2>
         </div>
-        <div class="table-responsive mt-4">
-            <table class="table table-bordered table-striped table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Nama Lokasi</th>
-                        <th>Kategori</th>
-                        <th>Longitude</th>
-                        <th>Latitude</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="location-table">
-                    <!-- Data akan dimuat di sini -->
-                </tbody>
-            </table>
+        <div class="row mt-4" id="location-container">
+            <!-- Cards akan dimuat di sini -->
         </div>
-        <button class="btn btn-primary"><a href="/card-location" style="color: white; text-decoration: none;">Card View</a></but+*
     </div>
     <script>
         function fetchLocations() {
             fetch('/locations')
                 .then(response => response.json())
                 .then(locations => {
-                    let tableBody = document.getElementById('location-table');
-                    tableBody.innerHTML = ''; // Bersihkan sebelum diisi ulang
+                    let container = document.getElementById('location-container');
+                    container.innerHTML = ''; // Bersihkan sebelum diisi ulang
                     locations.forEach(location => {
-                        let row = `
-                            <tr>
-                                <td>${location.name}</td>
-                                <td>${location.category}</td>
-                                <td>${location.longitude}</td>
-                                <td>${location.latitude}</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            &#x22EE;
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><button class="dropdown-item" onclick="editLocation(${location.id})"><image src="image/edit.png" width="20px"></image>Edit</button></li>
-                                            <li><button class="dropdown-item text-danger" onclick="deleteLocation(${location.id})"><image src="image/bin.png" width="20px"></image>Delete</button></li>
-                                        </ul>
+                        let card = `
+                            <div class="col-md-4 mb-4">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${location.name}</h5>
+                                        <p class="card-text">Kategori: ${location.category}</p>
+                                        <p class="card-text">Longitude: ${location.longitude}</p>
+                                        <p class="card-text">Latitude: ${location.latitude}</p>
+                                        <button class="btn btn-warning btn-sm" onclick="editLocation(${location.id})">Edit</button>
+                                        <button class="btn btn-danger btn-sm" onclick="deleteLocation(${location.id})">Delete</button>
                                     </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
                         `;
-                        tableBody.innerHTML += row;
+                        container.innerHTML += card;
                     });
                 })
                 .catch(error => console.error('Error fetching locations:', error));
@@ -123,6 +107,5 @@
 
         document.addEventListener("DOMContentLoaded", fetchLocations);
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
