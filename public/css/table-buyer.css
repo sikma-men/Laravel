@@ -1,0 +1,86 @@
+/* Buyer Table Container */
+.buyer-container {
+    margin-top: 80px;
+    padding: 20px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+.buyer-title {
+    text-align: center;
+    font-weight: bold;
+    color: #1e293b;
+}
+
+/* Add Buyer Button */
+.buyer-add-btn {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s ease;
+}
+
+.buyer-add-btn:hover {
+    background-color: #0b5ed7;
+    text-decoration: none;
+    color: white;
+}
+
+/* Table Styling */
+.buyer-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.buyer-table th,
+.buyer-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+}
+
+.buyer-table th {
+    background-color: #1e293b;
+    color: white;
+}
+
+.buyer-table tr:nth-child(even) {
+    background-color: #f1f5f9;
+}
+
+.buyer-table tr:hover {
+    background-color: #e2e8f0;
+}
+
+/* Action Buttons */
+.buyer-action-btn {
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    transition: background 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.buyer-action-edit {
+    background-color: #ffc107;
+}
+
+.buyer-action-edit:hover {
+    background-color: #e0a800;
+}
+
+.buyer-action-delete {
+    background-color: #dc3545;
+}
+
+.buyer-action-delete:hover {
+    background-color: #c82333;
+}

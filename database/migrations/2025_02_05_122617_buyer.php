@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         schema::create('buyer', function (Blueprint $table) {
-                $table->id('id supplier');
+                $table->id('id_buyer');
                 $table->string('first_name');
                 $table->string('last_name');
-                $table->string('email');
+                $table->string('email')->unique();
                 $table->string('phone');
-                $table->string('description');
+                $table->text('description');
                 $table->string('company_name');
                 $table->string('city');
                 $table->string('state');

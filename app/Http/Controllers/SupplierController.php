@@ -35,7 +35,7 @@ class SupplierController extends Controller
         $request->validate([
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'email' => 'required|string',
+            'email' => 'required|email',
             'phone' => 'required|string',
             'description' => 'required|string',
             'company_name' => 'required|string',
@@ -67,8 +67,13 @@ class SupplierController extends Controller
     }
     public function destroy($id)
     {
-        $supplier = Supplier::findOrFail($id);
-        $supplier->delete();
-        return response()->json(['message' => 'Supplier berhasil dihapus']);
+        try {
+            $supplier = Supplier::findOrFail($id);
+            $supplier->delete();
+            return response()->json(['message' => 'Supplier berhasil dihapus']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
+
 }

@@ -189,6 +189,8 @@
                 <div class="dropdown-content">
                     <a href="/table-supplier">
                         <i class="fas fa-table"></i> Data Supplier</a>
+                        <a href="/table-buyer">
+                            <i class="fas fa-table"></i> Data Buyer</a>
                 </div>
             </div>
 
