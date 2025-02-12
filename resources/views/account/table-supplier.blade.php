@@ -7,23 +7,30 @@
     <title>Supplier Data</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/table-supplier.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     @extends('layouts.sidebar')
-    <div class="container " style="margin-top: 80px;">
-        <h2 class="text-center">Data Supplier</h2>
-        <button class="btn btn-primary"><a href="/add-supplier" style="text-decoration: none; color: white; ">Tambah Supplier</a></button>
+    <div class="supplier-container">
+        <h2 class="supplier-title">Data Supplier</h2>
+        <a href="/add-supplier" class="supplier-add-btn">Tambah Supplier</a>
+
         <div class="table-responsive mt-4">
-            <table class="table table-bordered table-striped table-hover222">
-                <thead class="table-dark">
+            <table class="supplier-table">
+                <thead>
                     <tr>
                         <th>Nama Depan</th>
                         <th>Nama Belakang</th>
                         <th>Email</th>
                         <th>Telepon</th>
                         <th>Perusahaan</th>
+                        <th>Deskripsi</th>
+                        <th>Kota</th>
+                        <th>Status</th>
+                        <th>Negara</th>
+                        <th>Zipcode</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -49,9 +56,14 @@
                                 <td>${supplier.email}</td>
                                 <td>${supplier.phone}</td>
                                 <td>${supplier.company_name}</td>
+                                <td>${supplier.description}</td>
+                                <td>${supplier.city}</td>
+                                <td>${supplier.state}</td>
+                                <td>${supplier.country}</td>
+                                <td>${supplier.zipcode}</td>
                                 <td>
-                                    <button class="btn btn-warning btn-sm" onclick="editSupplier(${supplier.id})">Edit</button>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteSupplier(${supplier.id})">Delete</button>
+                                    <button class="supplier-action-btn supplier-action-edit" onclick="editSupplier(${supplier.id})">Edit</button>
+                                    <button class="supplier-action-btn supplier-action-delete" onclick="deleteSupplier(${supplier.id})">Delete</button>
                                 </td>
                             </tr>
                         `;
@@ -59,6 +71,10 @@
                     });
                 })
                 .catch(error => console.error('Error fetching suppliers:', error));
+        }
+
+        function editSupplier(id) {
+            window.location.href = `/edit-supplier/${id}`;
         }
 
         function deleteSupplier(id) {
@@ -74,8 +90,7 @@
                     fetch(`/suppliers/${id}`, {
                             method: 'DELETE',
                             headers: {
-                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-                                    'content')
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                             }
                         })
                         .then(response => response.json())

@@ -8,6 +8,11 @@ use App\Models\Supplier;
 
 class SupplierController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');

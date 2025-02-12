@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Log;
 
 class BuyerController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function index()
     {
         $buyer = buyer::all();

@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Log;
 
 class LocationController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function storeLocation(Request $request)
     {
         $request->validate([

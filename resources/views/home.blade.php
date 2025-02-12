@@ -10,7 +10,7 @@
 
 <body>
     @extends('layouts.sidebar')
-        <h1>Welcome</h1>
+        <h1 style="margin: 100px 0 0 100px">Welcome</h1>
 </body>
 
 </html>
