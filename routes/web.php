@@ -52,4 +52,8 @@ Route::middleware(['web'])->group(function () {
     // ================== Auto Numbering ==================
     Route::get('/numbering', [NumberingController::class, 'index'])->name('numbering');
     Route::post('/auto-numbering', [NumberingController::class, 'autoNumbering'])->name('auto-numbering');
+    Route::post('/search-number', [NumberingController::class, 'searchNumber'])->name('search-number');
+    Route::get('/searchnumber', function () {
+        return view('numbering.searchnumber');
+    });
 });

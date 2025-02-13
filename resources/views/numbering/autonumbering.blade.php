@@ -1,27 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.navbar_numbering')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Auto Numbering</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .form-container {
-            max-width: 400px;
-            background: #ffffff;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-</head>
+@section('title', 'Auto Numbering')
 
-<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
-    <div class="form-container">
-        <h3 class="text-center mb-3">Auto Numbering</h3>
+@section('content')
+<div class="container text-center mt-5 pt-4">
+    <h3 class="mb-4">Daftar</h3>
+
+    <!-- Form untuk generate nomor -->
+    <div class="form-container mx-auto mb-3" style="max-width: 400px;">
+        {{-- <h5>Generate Nomor</h5> --}}
         <form action="{{ route('auto-numbering') }}" method="post">
             @csrf
             <div class="mb-3">
@@ -42,16 +29,13 @@
                     <option value="PPLG">Pengembangan Perangkat Lunak Dan Game</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Submit</button>
+            <button type="submit" class="btn btn-primary w-100">Generate</button>
         </form>
-        <div class="mt-3 text-center">
-            <p class="fw-bold">Nomor Id Anda:</p>
-            <p class="fs-5 text-success">{{ $autoNumber ?? 'Nomor belum dihasilkan' }}</p>
-        </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+    <!-- Menampilkan nomor yang dihasilkan -->
+    @if(isset($autoNumber))
+        <div class="alert alert-success">Nomor ID Anda: <strong>{{ $autoNumber }}</strong></div>
+    @endif
+</div>
+@endsection
