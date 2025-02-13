@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\BuyerController;
+use App\Http\Controllers\NumberingController;
 
 Route::middleware(['web'])->group(function () {
     // ================== Dashboard ==================
@@ -47,4 +48,8 @@ Route::middleware(['web'])->group(function () {
     Route::get('/buyers', [BuyerController::class, 'index'])->name('buyers');
     Route::post('/buyers', [BuyerController::class, 'store'])->name('store-buyer');
     Route::delete('/buyers/{id}', [BuyerController::class, 'destroy']);
+
+    // ================== Auto Numbering ==================
+    Route::get('/numbering', [NumberingController::class, 'index'])->name('numbering');
+    Route::post('/auto-numbering', [NumberingController::class, 'autoNumbering'])->name('auto-numbering');
 });
