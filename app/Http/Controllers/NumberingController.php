@@ -22,10 +22,12 @@ class NumberingController extends Controller
         // Mapping jurusan ke kode
         $jurusanCodes = [
             'AKL' => '01',
+            'PM' => '02',
             'KLN' => '03',
             'HTL' => '04',
             'DKV' => '05',
             'PPLG' => '06',
+            'MPLB' => '07',
         ];
 
         $tanggalLahir = Carbon::parse($request->tanggal_lahir)->format('Ymd');
