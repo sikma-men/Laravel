@@ -1,6 +1,5 @@
 @extends('layouts.navbar_numbering')
 
-<<<<<<< HEAD
 @section('title', 'Auto Numbering')
 
 @section('content')
@@ -11,31 +10,6 @@
     <div class="form-container mx-auto mb-3" style="max-width: 400px;">
         {{-- <h5>Generate Nomor</h5> --}}
         <form action="{{ route('auto-numbering') }}" method="post">
-=======
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Auto Numbering</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
-        .form-container {
-            max-width: 400px;
-            background: #ffffff;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-</head>
-
-<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
-    <div class="form-container">
-        <h3 class="text-center mb-3">Auto Numbering</h3>
-        <form id="autoNumberForm" action="{{ route('auto-numbering') }}" method="post">
->>>>>>> origin/main
             @csrf
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama</label>
