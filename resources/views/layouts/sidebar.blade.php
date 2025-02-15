@@ -35,8 +35,6 @@
             font-weight: bold;
             color: #e2e8f0;
             background: linear-gradient(90deg, #e2e8f0, #cbd5e1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             transition: all 0.3s ease;
         }
 
